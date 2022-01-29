@@ -1,4 +1,4 @@
-import os, text_to_speech
+import os
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 prGreen("Starting setup!\n")
@@ -9,7 +9,7 @@ modules = [
     "text_to_speech",
     "SpeechRecognition",
     "google",
-    "youtube-search-python"
+    "youtube-search-python",
     "pynput",
     "beautifulsoup4",
     "requests",
