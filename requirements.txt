@@ -1,0 +1,11 @@
+subprocess.run
+windowsapps
+pytube 
+text_to_speech
+SpeechRecognition
+googlesearch-python
+youtube-search-python
+pynput
+beautifulsoup4
+requests
+pyttsx3
