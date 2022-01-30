@@ -9,11 +9,12 @@ modules = [
     "text_to_speech",
     "SpeechRecognition",
     "google",
-    "youtube-search-python",
+    "youtube-search-python"
     "pynput",
     "beautifulsoup4",
     "requests",
-    "pyttsx3"
+    "pyttsx3",
+    "nltk"
 
 ]
 for module in modules:
@@ -21,6 +22,8 @@ for module in modules:
     os.system(f"pip install {module}")
 
 import text_to_speech
-
+import nltk
+prGreen("Installing nltk datasets")
+nltk.download("all")
 text_to_speech.speak("Done installing myself, starting Olivia, you can quit this by pressing control c", save=False)
 os.system("python3 Olivia.py")
