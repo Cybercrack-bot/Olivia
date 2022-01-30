@@ -1,10 +1,34 @@
 from Core.functions import open_gmail, weather
 from text_to_speech import speak
+import nltk  
+from nltk.corpus import stopwords 
+from nltk.tokenize import word_tokenize, sent_tokenize
 from Core.functions import open_web, download_youtube_videos
 from Core.functions import suggest_music, search_web, open_discord, open_apps, search_youtube, switch_tabs
 from Core.Datasets import bot_identity
 import subprocess, sys, os
 sys.path.append(os.system("pwd"))
+def ProperNounExtractor(text : str):
+    sentences = nltk.sent_tokenize(text)
+    for sentence in sentences:
+        words = nltk.word_tokenize(sentence)
+        tagged = nltk.pos_tag(words)
+        for (word, tag) in tagged:
+            if tag == "NN" or tag == "NNS" or tag == "VBZ":
+                return word
+
+def checkPersonalQuestions(text):
+    nouns = ProperNounExtractor(text)
+    for word in text.split():
+        if nouns in word:
+            index1 = ((text.split()).index(word)) - 1
+            index2 = ((text.split()).index(word)) + 1
+            if text.split()[index1] == "your" or text.split()[index1] == "you":
+                return True
+            elif text.split()[index2] == "your" or text.split()[index2] == "you":
+                return True
+
+
 def search_youtube_command(command):
     possible_strings = [
         "search youtube for",
@@ -122,7 +146,9 @@ def play_music_command(command):
 
 def scan_for_guessing_function(command):
         command = cleanse_command(command)
-        if open_gmail.guess_function(command):
+        if checkPersonalQuestions(command):
+            speak("I dont answer personal questions sir")
+        elif open_gmail.guess_function(command):
             open_gmail.open_gmail_in_browser()
         elif download_youtube_videos.check_functions(command):
             query = download_youtube_videos.check_functions(command)
@@ -165,8 +191,7 @@ def scan_for_guessing_function(command):
         else:
             if thank_you_and_other_appreciations(command):
                 speak("You are very welcome sir")
-            elif bot_identity.guess_command(command):
-                speak(bot_identity.guess_command(command))
+            
     
 
 def thank_you_and_other_appreciations(command):
