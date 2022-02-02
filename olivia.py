@@ -2,10 +2,10 @@ try:
     import speech_recognition as sr
     from Core import option_redirector
     import datetime
-    from text_to_speech import speak
+    from text_to_speak import speak
     import initializeMods
     import sys, subprocess, json, os
-    from text_to_speech import speak
+    from text_to_speak import speak
     from Core import option_redirector
     from Core.offensive_mode import offensive_option_redirector
     r = sr.Recognizer()
