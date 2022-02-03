@@ -3,7 +3,6 @@ try:
     from Core import option_redirector
     import datetime
     from text_to_speak import speak
-    import initializeMods
     import sys, subprocess, json, os
     from text_to_speak import speak
     from Core import option_redirector
@@ -102,18 +101,7 @@ try:
             option_redirector.scan_for_guessing_function(command)
         else:
             offensive_option_redirector
-
-    try:
-        module_list = initializeMods.initialize_mods()
-    except NameError:
-        speak("The mod functions are not correct", save=False)
-        quit()
-    except ImportError:
-        speak("Problem importing mods, re-ensure all the paths are correct in config.jason", save=False)
-        quit()
-    except json.JSONDecodeError:
-        module_list = "No mods"
-
+    module_list = "No mods"
     greet(module_list)
 except ImportError:
     quit()
